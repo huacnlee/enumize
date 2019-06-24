@@ -1,7 +1,4 @@
 language: ruby
-env:
-  - USE_OFFICIAL_GEM_SOURCE=1
-  - RAILS_ENV=test
 
 services:
   - mysql
@@ -15,7 +12,8 @@ gemfile:
   - gemfiles/Gemfile-6-0
 
 before_script:
-  - bundle install
-  - cd test/dummy && bundle exec rake db:create db:migrate
+  - USE_OFFICIAL_GEM_SOURCE=1 bundle install
+  - cd test/dummy
+  - RAILS_ENV=test bundle exec rake db:create db:migrate
 
 script: RAILS_ENV=test bundle exec rake test

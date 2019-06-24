@@ -1,5 +1,7 @@
 # Enumize
 
+[![Build Status](https://travis-ci.org/huacnlee/enumize.svg?branch=master)](https://travis-ci.org/huacnlee/enumize)
+
 Extend [ActiveRecord::Enum](https://api.rubyonrails.org/classes/ActiveRecord/Enum.html) for add more helpful methods, from [rails/rails#36503](https://github.com/rails/rails/pull/36503).
 
 > 🚨 This Gem does not change the way you use ActiveRecord::Enum, just adds method extensions.
