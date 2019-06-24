@@ -13,7 +13,6 @@ gemfile:
 
 before_script:
   - USE_OFFICIAL_GEM_SOURCE=1 bundle install
-  - cd test/dummy
   - RAILS_ENV=test bundle exec rake db:create db:migrate
 
 script: RAILS_ENV=test bundle exec rake test
