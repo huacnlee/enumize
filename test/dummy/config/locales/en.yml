@@ -1,0 +1,13 @@
+en:
+  hello: "Hello world"
+  activerecord:
+    enums:
+      book:
+        status:
+          draft: Drafting
+          published: Published
+          archived: Archived
+        status_color:
+          draft: "#999999"
+          published: "green"
+          archived: "red"

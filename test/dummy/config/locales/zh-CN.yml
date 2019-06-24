@@ -1,0 +1,8 @@
+zh-CN:
+  activerecord:
+    enums:
+      book:
+        status:
+          draft: 草稿
+          published: 已发布
+          archived: 归档
