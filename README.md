@@ -1,6 +1,10 @@
 # Enumize
 
-Extend ActiveRecord::Enum for add more helpful methods, from [rails/rails#36503](https://github.com/rails/rails/pull/36503).
+Extend [ActiveRecord::Enum](https://api.rubyonrails.org/classes/ActiveRecord/Enum.html) for add more helpful methods, from [rails/rails#36503](https://github.com/rails/rails/pull/36503).
+
+> 🚨 This Gem does not change the way you use ActiveRecord::Enum, just adds method extensions.
+
+[中文介绍与使用说明](https://ruby-china.org/topics/38728)
 
 ## Usage
 
@@ -53,6 +57,16 @@ irb> @book.status_name
 "草稿"
 irb> @book.status_color
 "#999999"
+# You can still use the original methods from ActiveRecord::Enum
+irb> @book.status
+"draft"
+irb> @book.draft?
+true
+irb> @book.published!
+irb> @book.published?
+true
+irb> @book.status
+"published"
 ```
 
 For `_options` methods for `select` helper:
