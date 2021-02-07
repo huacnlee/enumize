@@ -22,6 +22,7 @@ Now we have `status_name`, `status_color`, `status_value` and `Book.status_optio
 - `#{attribute}_color` - return color for enum value from I18n file.
 - `#{attribute}_value` - return raw value for enum, Now we don't need use `Book.statuses[@book.status]`.
 - `Book.#{attribute}_options` - return a array list for select tag options, `<%= f.select :status, Book.status_options %>`.
+- `Book.#{attribute}_of_#{option}` - return a active record relation for enum value from database.
 
 Write I18n:
 
