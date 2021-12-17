@@ -1,0 +1,45 @@
+name: build
+on: push
+jobs:
+  test:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:10
+        env:
+          POSTGRES_DB: dummy-test
+          POSTGRES_USER: "admin"
+          POSTGRES_PASSWORD: "123456"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ruby: 3.0
+            gemfile: Gemfile
+          - ruby: 2.7
+            gemfile: gemfiles/Gemfile-6-1
+          - ruby: 2.6
+            gemfile: gemfiles/Gemfile-6-0
+          - ruby: 2.5
+            gemfile: gemfiles/Gemfile-5-2
+          - ruby: 2.5
+            gemfile: gemfiles/Gemfile-5-1
+          - ruby: 2.5
+            gemfile: gemfiles/Gemfile-5-0
+    env:
+      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      USE_OFFICIAL_GEM_SOURCE: 1
+      DATABASE_URL: postgres://admin:123456@postgres:5432/dummy-test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Before tests
+        run: |
+          cd test/dummy
+          RAILS_ENV=test rake db:create db:migrate
+      - name: Run tests
+        run: rake test

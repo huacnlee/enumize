@@ -1,6 +1,6 @@
 # Enumize
 
-[![Build Status](https://travis-ci.org/huacnlee/enumize.svg?branch=master)](https://travis-ci.org/huacnlee/enumize)
+[![build](https://github.com/huacnlee/enumize/actions/workflows/build.yml/badge.svg)](https://github.com/huacnlee/enumize/actions/workflows/build.yml)
 
 Extend [ActiveRecord::Enum](https://api.rubyonrails.org/classes/ActiveRecord/Enum.html) for add more helpful methods, from [rails/rails#36503](https://github.com/rails/rails/pull/36503).
 
@@ -35,18 +35,18 @@ en:
           published: Published
           archived: Archived
         status_color:
-          draft: "#999999"
-          published: "green"
-          archived: "red"
+          draft: '#999999'
+          published: 'green'
+          archived: 'red'
 
 zh-CN:
   activerecord:
     enums:
       book:
         status:
-          draft: "草稿"
-          published: "已发布"
-          archived: "归档"
+          draft: '草稿'
+          published: '已发布'
+          archived: '归档'
 ```
 
 use the methods:
@@ -90,6 +90,7 @@ gem 'enumize'
 ```
 
 And then execute:
+
 ```bash
 $ bundle
 ```
@@ -109,7 +110,7 @@ module Dummy
     config.i18n.fallbacks = true
   end
 end
-````
+```
 
 ## License
 
