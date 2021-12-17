@@ -39,6 +39,7 @@ jobs:
           bundler-cache: true
       - name: Before tests
         run: |
+          bundle
           cd test/dummy
           RAILS_ENV=test rake db:create db:migrate
       - name: Run tests
