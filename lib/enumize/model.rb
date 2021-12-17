@@ -5,9 +5,23 @@ module Enumize
     extend ActiveSupport::Concern
 
     class_methods do
+      if Rails.version.to_f < 7.0
+        def enum(opts)
+          super(opts)
+
+          opts.each do |name, values|
+            _enumize(name, values)
+          end
+        end
+      end
+
       def _enum(name, values, **options)
         super(name, values, **options)
 
+        _enumize(name, values, **options)
+      end
+
+      def _enumize(name, values, **options)
         klass = self
         singular_model_name = klass.name.singularize.underscore
         locale_prefix = "activerecord.enums.#{singular_model_name}"
