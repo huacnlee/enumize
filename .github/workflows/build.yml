@@ -4,13 +4,6 @@ jobs:
   test:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:10
-        env:
-          POSTGRES_DB: dummy-test
-          POSTGRES_USER: "admin"
-          POSTGRES_PASSWORD: "123456"
     strategy:
       fail-fast: false
       matrix:
@@ -30,17 +23,17 @@ jobs:
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       USE_OFFICIAL_GEM_SOURCE: 1
-      DATABASE_URL: postgres://admin:123456@postgres:5432/dummy-test
+      RAILS_ENV: test
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Before tests
-        run: |
-          bundle
-          cd test/dummy
-          RAILS_ENV=test rake db:create db:migrate
+      - uses: ankane/setup-postgres@v1
+        with:
+          postgres-version: 10
+      - run: createdb dummy_test
+      - run: bundle exec rails db:migrate
       - name: Run tests
-        run: rake test
+        run: bundle exec rails test
