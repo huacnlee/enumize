@@ -8,8 +8,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ruby: 3.0
+          - ruby: 3.2
             gemfile: Gemfile
+          - ruby: 3.0
+            gemfile: gemfiles/Gemfile-7-0
           - ruby: 2.7
             gemfile: gemfiles/Gemfile-6-1
           - ruby: 2.6
@@ -25,7 +27,7 @@ jobs:
       USE_OFFICIAL_GEM_SOURCE: 1
       RAILS_ENV: test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
