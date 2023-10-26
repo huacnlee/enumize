@@ -58,6 +58,14 @@ module Enumize
             label = new(name => k).send("#{name}_name")
             [label, k]
           end
+
+          # Book.status_of_published
+          values.each do |key, val|
+            detect_enum_conflict!(name, "#{name}_of_#{key}", true)
+            define_singleton_method("#{name}_of_#{key}") do
+              klass.where("#{name}": val)
+            end
+          end
         end
       end
     end
